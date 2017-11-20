@@ -4,10 +4,10 @@ class Product extends Component {
   render() {
     return (
       <div>
-        <h2>{ this.props.title }</h2>
-        <p>Subtitle</p>
+        <h2>{ this.props.productObj.title }</h2>
+        <p>{ this.props.productObj.subtitle }</p>
 
-        <small>xx subscribers</small>
+        <small>{ this.props.productObj.subCount } subscribers</small>
       </div>
     )
   }

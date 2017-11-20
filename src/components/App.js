@@ -12,26 +12,42 @@ class App extends Component {
     }
 
     // from the db
-    const productTitles = [
-      'Product Hunt Project X',
-      'MeetPro',
-      'Plutio'
+    const products = [
+      {
+        title: 'Product Hunt Project X',
+        subtitle: 'Something different from the Product Hunt team',
+        subCount: 2716
+      },
+      {
+        title: 'MeetPro',
+        subtitle: 'Meet with investors, no warm introduction needed ✨',
+        subCount: 85
+      },
+      {
+        title: 'Plutio',
+        subtitle: '🚨 One place for everything to run your freelance business 👌',
+        subCount: 524
+      }
     ]
 
-    const productComponents = productTitles.map(product => {
-      return <Product title={product} />
+    const allProducts = products.map((product, index) => {
+      return <Product key={index} productObj={product} />
     })
 
 
-    return <div>
-      <Nav
-        navProp={navProp}
-      />
-      <h1>Hello React!</h1>
-      <p>From WDI 12</p>
+    return (
+      <div>
+        <Nav
+          navProp={navProp}
+        />
+        <div className="container">
+          <h1>Hello React!</h1>
+          <p>From WDI 12</p>
 
-      { productComponents }
-    </div>
+          { allProducts }
+        </div>
+      </div>
+    )
   }
 }
 
