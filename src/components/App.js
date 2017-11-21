@@ -5,23 +5,31 @@ import Nav from './Nav'
 import Product from './Product'
 
 class App extends Component {
-  constructor(props) {
+  constructor (props) {
     super()
 
     // this is where i init the state
     this.state = {
-      counter: 12
+      counter: 12,
+      keyword: ''
     }
   }
 
-  clickButton(e) {
+  clickButton (e) {
     console.log('button is clicked')
     this.setState({
       counter: this.state.counter + 1
     })
   }
 
-  render() {
+  handleKeyup (e) {
+    var typedValue = e.target.value
+    this.setState({
+      keyword: typedValue
+    })
+  }
+
+  render () {
     const navProp = {
       username: 'Shumin',
       title: 'Proddiez',
@@ -81,26 +89,26 @@ class App extends Component {
       return <Product key={index} productObj={product} />
     })
 
-
     return (
       <div>
         <Nav
           navProp={navProp}
         />
-        <div className="container">
-          <div className="row">
-            <h1>Counter: {this.state.counter}</h1>
-            <button onClick={(e) => this.clickButton(e)}>+</button>
+        <div className='container'>
+          <div className='row'>
+            <h1>New Product: {this.state.keyword}</h1>
           </div>
-          <div className="row">
-            <div className="input-field col s6">
-              <input id="new-product" type="text" className="" />
-              <label className="active" htmlFor="new-product">
+          <div className='row'>
+            <div className='input-field col s6'>
+              <input id='new-product' type='text'
+                className=''
+                onKeyUp={(e) => this.handleKeyup(e)} />
+              <label className='active' htmlFor='new-product'>
                 New Product
               </label>
             </div>
           </div>
-          <div className="row App-products">
+          <div className='row App-products'>
             { allProducts }
           </div>
         </div>
