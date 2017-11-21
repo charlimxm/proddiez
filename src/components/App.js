@@ -5,6 +5,21 @@ import Nav from './Nav'
 import Product from './Product'
 
 class App extends Component {
+  constructor(props) {
+    super()
+    // this is where i init the state
+    this.state = {
+      counter: 12
+    }
+  }
+
+  clickButton(e) {
+    console.log('button is clicked')
+    this.setState({
+      counter: this.state.counter + 1
+    })
+  }
+
   render() {
     const navProp = {
       username: 'Shumin',
@@ -72,6 +87,10 @@ class App extends Component {
           navProp={navProp}
         />
         <div className="container">
+          <div className="row">
+            <h1>Counter: {this.state.counter}</h1>
+            <button onClick={(e) => this.clickButton(e)}>+</button>
+          </div>
           <div className="row App-products">
             { allProducts }
           </div>
