@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './App.css'
 
 import Nav from './Nav'
 import Product from './Product'
@@ -27,6 +28,36 @@ class App extends Component {
         title: 'Plutio',
         subtitle: '🚨 One place for everything to run your freelance business 👌',
         subCount: 524
+      },
+      {
+        title: 'Tesla Powerbank',
+        subtitle: 'A Tesla supercharger for your phone!',
+        subCount: 816
+      },
+      {
+        title: 'Briefcase by AppSumo',
+        subtitle: 'Netflix for software',
+        subCount: 581
+      },
+      {
+        title: 'Product Reviews',
+        subtitle: 'Concise and unbiased software product reviews',
+        subCount: 375
+      },
+      {
+        title: 'Ello 3.0',
+        subtitle: 'A social network for artists',
+        subCount: 268
+      },
+      {
+        title: 'Orbitkey Ring',
+        subtitle: 'The keyring, reinvented',
+        subCount: 188
+      },
+      {
+        title: 'Who is mining?',
+        subtitle: 'A simple tool to see which sites are mining cryptocurrency',
+        subCount: 148
       }
     ]
 
@@ -41,10 +72,9 @@ class App extends Component {
           navProp={navProp}
         />
         <div className="container">
-          <h1>Hello React!</h1>
-          <p>From WDI 12</p>
-
-          { allProducts }
+          <div className="row App-products">
+            { allProducts }
+          </div>
         </div>
       </div>
     )
