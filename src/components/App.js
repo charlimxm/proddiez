@@ -7,6 +7,7 @@ import Product from './Product'
 class App extends Component {
   constructor(props) {
     super()
+
     // this is where i init the state
     this.state = {
       counter: 12
@@ -90,6 +91,14 @@ class App extends Component {
           <div className="row">
             <h1>Counter: {this.state.counter}</h1>
             <button onClick={(e) => this.clickButton(e)}>+</button>
+          </div>
+          <div className="row">
+            <div className="input-field col s6">
+              <input id="new-product" type="text" className="" />
+              <label className="active" htmlFor="new-product">
+                New Product
+              </label>
+            </div>
           </div>
           <div className="row App-products">
             { allProducts }
