@@ -1,9 +1,5 @@
-.App-products {
+.container .row {
   margin-top: 20px;
-}
-
-.App-products {
-  /*column-break-inside: avoid;*/
 }
 
 .App-products .col {
