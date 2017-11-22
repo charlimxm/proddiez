@@ -78,10 +78,8 @@ class App extends Component {
   constructor (props) {
     super()
 
-    // this is where i init the state
+    // this is where I init the state
     this.state = {
-      counter: 12,
-      keyword: '',
       allProducts: products,
       addedProduct: {}
     }
@@ -99,6 +97,7 @@ class App extends Component {
     }
 
     // update the state
+
     this.setState({
       addedProduct: newProduct
     })
@@ -160,7 +159,27 @@ class App extends Component {
     })
   }
 
+  addProduct (e) {
+    this.setState({
+      products: [
+        ...this.state.products,
+        this.state.newProduct
+      ],
+      newProduct: {}
+    })
+  }
+
+  handleSearch (e) {
+    let filteredProducts = products.filter(product => {
+      return product.title.toLowerCase().includes(e.target.value)
+    })
+    this.setState({
+      products: filteredProducts
+    })
+  }
+
   // custom event handler, that's not expecting an event object
+  // TODO: complete this method to delete the product with givenId
   deleteProduct = (givenId) => {
     alert(`remove product id: ${givenId}`)
 
