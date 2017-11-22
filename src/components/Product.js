@@ -32,9 +32,15 @@ class Product extends Component {
             <p>{ this.props.productObj.subtitle }</p>
             <p className="right">{ this.state.subCount } subscribers</p>
           </div>
-          <div className="card-action white-text right-align">
-            <a className="btn" onClick={(e) => this.hideCard(e) }>Hide</a>
-            <a className="btn" onClick={(e) => this.addSubcriber(e)}>Subscribe</a>
+          <div className="card-action white-text">
+            <a className="btn btn-floating red"
+              onClick={(e) => this.hideCard(e) }>
+              <i class="material-icons">close</i>
+            </a>
+            <a className="btn btn-floating right"
+              onClick={(e) => this.addSubcriber(e)}>
+              <i class="material-icons">add</i>
+            </a>
           </div>
         </div>
       </div>
