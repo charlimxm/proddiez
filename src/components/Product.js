@@ -17,10 +17,9 @@ class Product extends Component {
     })
   }
 
-  // hideCard(e) {
-  //   this.setState({
-  //     hideClass: 'card grey darken-3'
-  //   })
+  // this method is suppose to be at app.js
+  // deleteProduct = (e) => {
+  //   alert('remove myself')
   // }
 
   render() {
@@ -33,7 +32,9 @@ class Product extends Component {
             <p className="right">{ this.state.subCount } subscribers</p>
           </div>
           <div className="card-action white-text">
-            <a className="btn btn-floating red">
+            <a className="btn btn-floating red"
+              onClick={(e) => this.props.delete(this.props.productObj.id)}
+            >
               <i className="material-icons">close</i>
             </a>
             <a className="btn btn-floating right"

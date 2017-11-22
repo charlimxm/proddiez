@@ -5,6 +5,7 @@ import './App.css'
 
 import Nav from './Nav'
 import Product from './Product'
+import { Input, Row, Button } from 'react-materialize';
 
 // from the db
 const products = [
@@ -14,69 +15,56 @@ const products = [
     subtitle: 'Something different from the Product Hunt team',
     subCount: 2716,
     category: 'one'
-
-  }
-  ,
+  },
   {
     id: 2,
     title: 'MeetPro',
     subtitle: 'Meet with investors, no warm introduction needed ✨',
     subCount: 85,
     category: 'two'
-
-  }
-  ,
+  },
   {
     id: 3,
     title: 'Plutio',
     subtitle: '🚨 One place for everything to run your freelance business 👌',
     subCount: 524,
     category: 'three'
-
-  }
-  ,
+  },
   {
     id: 4,
     title: 'Tesla Powerbank',
     subtitle: 'A Tesla supercharger for your phone!',
     subCount: 816,
     category: 'one'
-
-  }
-  ,
+  },
   {
     id: 5,
     title: 'Briefcase by AppSumo',
     subtitle: 'Netflix for software',
     subCount: 581,
     category: 'two'
-  }
-  ,
+  },
   {
     id: 6,
     title: 'Product Reviews',
     subtitle: 'Concise and unbiased software product reviews',
     subCount: 375,
     category: 'three'
-  }
-  ,
+  },
   {
     id: 7,
     title: 'Ello 3.0',
     subtitle: 'A social network for artists',
     subCount: 268,
     category: 'one'
-
-  }
-  ,
+  },
   {
     id: 8,
     title: 'Orbitkey Ring',
     subtitle: 'The keyring, reinvented',
     subCount: 188,
     category: 'two'
-  }
-  ,
+  },
   {
     id: 9,
     title: 'Who is mining?',
@@ -172,6 +160,16 @@ class App extends Component {
     })
   }
 
+  // custom event handler, that's not expecting an event object
+  deleteProduct = (givenId) => {
+    alert(`remove product id: ${givenId}`)
+
+    // find the id that was suppose to be removed
+    // and remove the product from the state allProducts
+
+    // remove the product with id == givenId
+  }
+
   render () {
     const navProp = {
       username: 'Shumin',
@@ -181,7 +179,13 @@ class App extends Component {
 
     const allProducts = this.state.allProducts.map((product, index) => {
       // change key to point to product id instead
-      return <Product key={product.id} productObj={product} />
+      return (
+        <Product
+          key={product.id}
+          productObj={product}
+          delete={this.deleteProduct}
+        />
+      )
     })
 
     return (
@@ -212,24 +216,17 @@ class App extends Component {
                 Search
               </label>
             </div>
-            <div className="input-field col s12">
-              <label className="select-label">Filter</label>
-              <select
-                onChange={this.handleChangeFilter}
-                className="browser-default"
-              >
-                <option value="" disabled defaultValue>Choose your option</option>
-                <option value="one">Category 1</option>
-                <option value="two">Category 2</option>
-                <option value="three">Category 3</option>
-              </select>
-              <button
-                className="btn btn-float"
-                onClick={this.handleClickClearFilter}>
-                Clear
-              </button>
-            </div>
           </div>
+          <Row>
+            <Input s={12} type='select' label="Filter" defaultValue=''
+              onChange={this.handleChangeFilter}
+            >
+              <option value='one'>Option 1</option>
+              <option value='two'>Option 2</option>
+              <option value='three'>Option 3</option>
+            </Input>
+            <Button onClick={this.handleClickClearFilter}>Clear</Button>
+          </Row>
           <div className="row App-products">
             { allProducts }
           </div>
