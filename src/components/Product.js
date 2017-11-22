@@ -17,11 +17,11 @@ class Product extends Component {
     })
   }
 
-  hideCard(e) {
-    this.setState({
-      hideClass: 'card grey darken-3'
-    })
-  }
+  // hideCard(e) {
+  //   this.setState({
+  //     hideClass: 'card grey darken-3'
+  //   })
+  // }
 
   render() {
     return (
@@ -33,13 +33,12 @@ class Product extends Component {
             <p className="right">{ this.state.subCount } subscribers</p>
           </div>
           <div className="card-action white-text">
-            <a className="btn btn-floating red"
-              onClick={(e) => this.hideCard(e) }>
-              <i class="material-icons">close</i>
+            <a className="btn btn-floating red">
+              <i className="material-icons">close</i>
             </a>
             <a className="btn btn-floating right"
               onClick={(e) => this.addSubcriber(e)}>
-              <i class="material-icons">add</i>
+              <i className="material-icons">add</i>
             </a>
           </div>
         </div>

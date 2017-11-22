@@ -1,9 +1,18 @@
-.App-products {
-  margin-top: 20px;
+.container .row {
+  margin-top: 30px;
 }
 
-.App-products {
-  /*column-break-inside: avoid;*/
+.input-field > select {
+  width: inherit;
+  height: inherit;
+  opacity: 1;
+  pointer-events: inherit;
+  position: relative;
+  margin: 20px 0;
+}
+
+.input-field label.select-label {
+  position: relative;
 }
 
 .App-products .col {
