@@ -90,12 +90,17 @@ class App extends Component {
   componentDidMount(){
     const rootRef = fire.database().ref('react')
     const productsRef = rootRef.child('products')
-    productsRef.on('value', snap => {
-      console.log(snap.val())
-      this.setState({
-        allProducts: snap.val()
-      })
-    })
+    productsRef.on('value',
+      snap => {
+        console.log(snap.val())
+        this.setState({
+          allProducts: snap.val()
+        })
+      },
+      err => {
+        console.log(err)
+      }
+    )
   }
 
   handleKeyup = (e) => {
@@ -135,7 +140,7 @@ class App extends Component {
 
     const rootRef = fire.database().ref('react')
     const productsRef = rootRef.child('products')
-    productsRef.push( this.state.addedProduct );
+    productsRef.push( this.state.addedProduct )
 
     // missing ux consideration. update the input field
     // console.log(e.target)
@@ -177,16 +182,6 @@ class App extends Component {
     })
   }
 
-  addProduct (e) {
-    this.setState({
-      products: [
-        ...this.state.products,
-        this.state.newProduct
-      ],
-      newProduct: {}
-    })
-  }
-
   handleSearch (e) {
     let filteredProducts = products.filter(product => {
       return product.title.toLowerCase().includes(e.target.value)
@@ -214,16 +209,20 @@ class App extends Component {
       useremail: 'shumin@gmail.com'
     }
 
-    const allProducts = this.state.allProducts.map((product, index) => {
-      // change key to point to product id instead
-      return (
-        <Product
-          key={product.id}
-          productObj={product}
-          delete={this.deleteProduct}
-        />
-      )
+    // need to convert the allProducts state to an array, because now it's an object instead
+    const allProducts = Object.values(this.state.allProducts).map((product, id) => {
+        return (
+          <Product
+            key={id}
+            productObj={product}
+            delete={this.deleteProduct}
+          />
+        )
     })
+
+    // const allProducts = this.state.allProducts.map((product, index) => {
+    //   // change key to point to product id instead
+    // })
 
     return (
       <div>
