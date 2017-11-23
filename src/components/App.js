@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import uuidv4 from 'uuid/v4'
 
 import './App.css'
@@ -168,19 +169,23 @@ class App extends Component {
     })
   }
 
-  addSubcriber(productId) {
-    alert('clicked received from child')
-    alert(productId)
+  addSubcriber = (productId) => {
 
     // find the product with given id,
     // increase the product's subcount + 1
+    let updatedProduct = this.state.allProducts.find(product => {
+      return product.id === productId
+    })
 
-    
+    updatedProduct.subCount += 1
 
+    let sortedProducts = this.state.allProducts.sort((a, b) => {
+      return b.subCount - a.subCount
+    })
 
-    // this.setState({
-    //   subCount: this.state.subCount + 1
-    // })
+    this.setState({
+      allProducts: sortedProducts
+    })
   }
 
   // custom event handler, that's not expecting an event object

@@ -5,10 +5,10 @@ class Product extends Component {
     super()
 
     // convert the props.productObj.subCount => state
-    this.state = {
-      subCount: props.productObj.subCount,
-      hideClass: 'card blue-grey darken-1'
-    }
+    // this.state = {
+    //   subCount: props.productObj.subCount,
+    //   hideClass: 'card blue-grey darken-1'
+    // }
   }
 
   // this is also suppose to be at app.js
@@ -25,12 +25,12 @@ class Product extends Component {
 
   render() {
     return (
-      <div className="col s12 m4">
-        <div className={this.state.hideClass}>
+      <div className="col s12">
+        <div className="card blue-grey darken-1">
           <div className="card-content white-text">
             <span className="card-title">{ this.props.productObj.title }</span>
             <p>{ this.props.productObj.subtitle }</p>
-            <p className="right">{ this.state.subCount } subscribers</p>
+            <p className="right">{ this.props.productObj.subCount } subscribers</p>
           </div>
           <div className="card-action white-text">
             <a className="btn btn-floating red"
