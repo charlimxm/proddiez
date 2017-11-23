@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import { Input, Row, Button } from 'react-materialize';
 import uuidv4 from 'uuid/v4'
+
+import fire from '../config/firebase'
 
 import './App.css'
 
 import Nav from './Nav'
 import Product from './Product'
-import { Input, Row, Button } from 'react-materialize';
 
 // from the db
 const products = [
@@ -80,9 +82,20 @@ class App extends Component {
 
     // this is where I init the state
     this.state = {
-      allProducts: products,
+      allProducts: [],
       addedProduct: {}
     }
+  }
+
+  componentDidMount(){
+    const rootRef = fire.database().ref('react')
+    const productsRef = rootRef.child('products')
+    productsRef.on('value', snap => {
+      console.log(snap.val())
+      this.setState({
+        allProducts: snap.val()
+      })
+    })
   }
 
   handleKeyup = (e) => {
@@ -93,7 +106,8 @@ class App extends Component {
       id: uuidv4(),
       title: typedValue,
       subtitle: 'Placeholder',
-      subCount: 0
+      subCount: 0,
+      category: 'one'
     }
 
     // update the state
@@ -111,13 +125,17 @@ class App extends Component {
     // console.log('form submit cancelled')
 
     // console.log('added product into the allProducts state now')
-    this.setState({
-      allProducts: [
-        this.state.addedProduct,
-        ...this.state.allProducts
-      ],
-      addedProduct: {}
-    })
+    // this.setState({
+    //   allProducts: [
+    //     this.state.addedProduct,
+    //     ...this.state.allProducts
+    //   ],
+    //   addedProduct: {}
+    // })
+
+    const rootRef = fire.database().ref('react')
+    const productsRef = rootRef.child('products')
+    productsRef.push( this.state.addedProduct );
 
     // missing ux consideration. update the input field
     // console.log(e.target)
