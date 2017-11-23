@@ -159,16 +159,6 @@ class App extends Component {
     })
   }
 
-  addProduct (e) {
-    this.setState({
-      products: [
-        ...this.state.products,
-        this.state.newProduct
-      ],
-      newProduct: {}
-    })
-  }
-
   handleSearch (e) {
     let filteredProducts = products.filter(product => {
       return product.title.toLowerCase().includes(e.target.value)
@@ -178,13 +168,36 @@ class App extends Component {
     })
   }
 
+  addSubcriber(productId) {
+    alert('clicked received from child')
+    alert(productId)
+
+    // find the product with given id,
+    // increase the product's subcount + 1
+
+    
+
+
+    // this.setState({
+    //   subCount: this.state.subCount + 1
+    // })
+  }
+
   // custom event handler, that's not expecting an event object
   // TODO: complete this method to delete the product with givenId
   deleteProduct = (givenId) => {
-    alert(`remove product id: ${givenId}`)
+    // alert(`remove product id: ${givenId}`)
 
     // find the id that was suppose to be removed
     // and remove the product from the state allProducts
+
+    const productsWithoutGivenId = this.state.allProducts.filter(product => {
+      return product.id !== givenId
+    })
+
+    this.setState({
+      allProducts: productsWithoutGivenId
+    })
 
     // remove the product with id == givenId
   }
@@ -200,9 +213,10 @@ class App extends Component {
       // change key to point to product id instead
       return (
         <Product
-          key={product.id}
+          key={index}
           productObj={product}
           delete={this.deleteProduct}
+          addSub={this.addSubcriber}
         />
       )
     })

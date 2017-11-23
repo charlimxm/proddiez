@@ -11,11 +11,12 @@ class Product extends Component {
     }
   }
 
-  addSubcriber(e) {
-    this.setState({
-      subCount: this.state.subCount + 1
-    })
-  }
+  // this is also suppose to be at app.js
+  // addSubcriber(e) {
+  //   this.setState({
+  //     subCount: this.state.subCount + 1
+  //   })
+  // }
 
   // this method is suppose to be at app.js
   // deleteProduct = (e) => {
@@ -33,12 +34,11 @@ class Product extends Component {
           </div>
           <div className="card-action white-text">
             <a className="btn btn-floating red"
-              onClick={(e) => this.props.delete(this.props.productObj.id)}
-            >
+              onClick={(e) => this.props.delete(this.props.productObj.id)}>
               <i className="material-icons">close</i>
             </a>
             <a className="btn btn-floating right"
-              onClick={(e) => this.addSubcriber(e)}>
+              onClick={(e) => this.props.addSub(this.props.productObj.id)}>
               <i className="material-icons">add</i>
             </a>
           </div>
