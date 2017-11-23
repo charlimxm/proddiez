@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 
 import uuidv4 from 'uuid/v4'
+import { Input, Row, Button } from 'react-materialize'
 
 import './App.css'
+import fire from '../config/firebase'
 
 import Nav from './Nav'
 import Product from './Product'
-import { Input, Row, Button } from 'react-materialize';
 
 // from the db
 const products = [
@@ -81,7 +82,7 @@ class App extends Component {
 
     // this is where I init the state
     this.state = {
-      allProducts: products,
+      allProducts: [],
       addedProduct: {}
     }
   }
@@ -157,15 +158,6 @@ class App extends Component {
   handleClickClearFilter = (e) => {
     this.setState({
       allProducts: products
-    })
-  }
-
-  handleSearch (e) {
-    let filteredProducts = products.filter(product => {
-      return product.title.toLowerCase().includes(e.target.value)
-    })
-    this.setState({
-      products: filteredProducts
     })
   }
 
@@ -271,6 +263,18 @@ class App extends Component {
         </div>
       </div>
     )
+  }
+
+  componentDidMount() {
+    let rootRef = fire.database().ref('root')
+    let productsRef = rootRef.child('products')
+
+    // 'value' event grabs the whole db. per reference
+    productsRef.on('value', snap => {
+      this.setState({
+        allProducts: snap.val()
+      })
+    })
   }
 }
 
