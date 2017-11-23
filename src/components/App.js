@@ -14,63 +14,63 @@ const products = [
     id: 1,
     title: 'Product Hunt Project X',
     subtitle: 'Something different from the Product Hunt team',
-    subCount: 2716,
+    subCount: 0,
     category: 'one'
   },
   {
     id: 2,
     title: 'MeetPro',
     subtitle: 'Meet with investors, no warm introduction needed ✨',
-    subCount: 85,
+    subCount: 0,
     category: 'two'
   },
   {
     id: 3,
     title: 'Plutio',
     subtitle: '🚨 One place for everything to run your freelance business 👌',
-    subCount: 524,
+    subCount: 0,
     category: 'three'
   },
   {
     id: 4,
     title: 'Tesla Powerbank',
     subtitle: 'A Tesla supercharger for your phone!',
-    subCount: 816,
+    subCount: 0,
     category: 'one'
   },
   {
     id: 5,
     title: 'Briefcase by AppSumo',
     subtitle: 'Netflix for software',
-    subCount: 581,
+    subCount: 0,
     category: 'two'
   },
   {
     id: 6,
     title: 'Product Reviews',
     subtitle: 'Concise and unbiased software product reviews',
-    subCount: 375,
+    subCount: 0,
     category: 'three'
   },
   {
     id: 7,
     title: 'Ello 3.0',
     subtitle: 'A social network for artists',
-    subCount: 268,
+    subCount: 0,
     category: 'one'
   },
   {
     id: 8,
     title: 'Orbitkey Ring',
     subtitle: 'The keyring, reinvented',
-    subCount: 188,
+    subCount: 0,
     category: 'two'
   },
   {
     id: 9,
     title: 'Who is mining?',
     subtitle: 'A simple tool to see which sites are mining cryptocurrency',
-    subCount: 148,
+    subCount: 0,
     category: 'three'
   }
 ]
@@ -172,7 +172,7 @@ class App extends Component {
   addSubcriber = (productId) => {
 
     // find the product with given id,
-    // increase the product's subcount + 1
+    // increase the retrieved product's subcount + 1
     let updatedProduct = this.state.allProducts.find(product => {
       return product.id === productId
     })
@@ -220,7 +220,7 @@ class App extends Component {
         <Product
           key={index}
           productObj={product}
-          delete={this.deleteProduct}
+          deleteProduct={this.deleteProduct}
           addSub={this.addSubcriber}
         />
       )
