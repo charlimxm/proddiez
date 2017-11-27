@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
 import uuidv4 from 'uuid/v4'
+import gql from 'graphql-tag'
+import { graphql } from 'react-apollo'
+
 import { Input, Row, Button } from 'react-materialize'
 
 import './App.css'
@@ -8,6 +11,8 @@ import fire from '../config/firebase'
 
 import Nav from './Nav'
 import Product from './Product'
+import Link from './Link'
+import CreateLink from './CreateLink'
 
 // from the db
 const products = [
@@ -75,6 +80,18 @@ const products = [
     category: 'three'
   }
 ]
+
+const ALL_LINKS_QUERY = gql`
+  # 2
+  query AllLinksQuery {
+    allLinks {
+      id
+      createdAt
+      url
+      description
+    }
+  }
+`
 
 class App extends Component {
   constructor (props) {
@@ -218,13 +235,24 @@ class App extends Component {
       )
     })
 
+    if (this.props.allLinksQuery && this.props.allLinksQuery.loading) {
+      return <div>Loading</div>
+    }
+
+    if (this.props.allLinksQuery && this.props.allLinksQuery.error) {
+      return <div>Error</div>
+    }
+
+    const linksToRender = this.props.allLinksQuery.allLinks
+
     return (
       <div>
         <Nav
           navProp={navProp}
         />
         <div className="container">
-          <div className="row">
+          <CreateLink />
+          {/* <div className="row">
             <div className="input-field col s6">
               <input id="new-product" type="text"
                 className=""
@@ -256,9 +284,14 @@ class App extends Component {
               <option value='three'>Option 3</option>
             </Input>
             <Button onClick={this.handleClickClearFilter}>Clear</Button>
-          </Row>
-          <div className="row App-products">
+          </Row> */}
+          {/* <div className="row App-products">
             { allProducts }
+          </div> */}
+          <div className="row">
+            {linksToRender.map(link => (
+              <Link key={link.id} link={link}/>
+            ))}
           </div>
         </div>
       </div>
@@ -278,4 +311,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default graphql(ALL_LINKS_QUERY, { name: 'allLinksQuery' }) (App)
